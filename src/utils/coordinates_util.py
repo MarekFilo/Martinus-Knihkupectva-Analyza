@@ -2,9 +2,14 @@ from src.types.types import Coordinates
 from geopy.geocoders import Nominatim
 from math import radians, sin, cos, sqrt, atan2
 from typing import Optional
+import re
 
 
 def get_coordinates_for_city(city_name: str) -> Optional[Coordinates]:
+    city_name = re.sub(
+        r"\bUl\.\s*|\bul\.\s*|\bulica\b", "", city_name, flags=re.IGNORECASE
+    )
+
     geolocator = Nominatim(user_agent="my_geocoder")
     if location := geolocator.geocode(city_name, country_codes="SK"):
         return Coordinates(latitude=location.latitude, longitude=location.longitude)
