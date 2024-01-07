@@ -6,13 +6,11 @@ from typing import Optional
 
 def get_coordinates_for_city(city_name: str) -> Optional[Coordinates]:
     geolocator = Nominatim(user_agent="my_geocoder")
-    location = geolocator.geocode(city_name, country_codes="SK")
-
-    if location:
+    if location := geolocator.geocode(city_name, country_codes="SK"):
         return Coordinates(latitude=location.latitude, longitude=location.longitude)
-    else:
-        print(f"Coordinates not found for {city_name}")
-        return None
+
+    print(f"Coordinates not found for {city_name}")
+    return None
 
 
 def haversine_distance(coord1: Coordinates, coord2: Coordinates) -> float:
@@ -28,6 +26,4 @@ def haversine_distance(coord1: Coordinates, coord2: Coordinates) -> float:
     a = sin(dlat / 2) ** 2 + cos(lat1) * cos(lat2) * sin(dlon / 2) ** 2
     c = 2 * atan2(sqrt(a), sqrt(1 - a))
 
-    distance = R * c
-
-    return distance
+    return R * c
