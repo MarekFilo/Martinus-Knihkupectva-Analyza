@@ -6,7 +6,7 @@ from typing import Optional
 
 def get_coordinates_for_city(city_name: str) -> Optional[Coordinates]:
     geolocator = Nominatim(user_agent="my_geocoder")
-    location = geolocator.geocode(city_name)
+    location = geolocator.geocode(city_name, country_codes="SK")
 
     if location:
         return Coordinates(latitude=location.latitude, longitude=location.longitude)
@@ -18,8 +18,8 @@ def get_coordinates_for_city(city_name: str) -> Optional[Coordinates]:
 def haversine_distance(coord1: Coordinates, coord2: Coordinates) -> float:
     R = 6371.0
 
-    lat1, lon1 = radians(coord1.latitude), radians(coord1.longitude)
-    lat2, lon2 = radians(coord2.latitude), radians(coord2.longitude)
+    lat1, lon1 = radians(coord1[0]), radians(coord1[1])
+    lat2, lon2 = radians(coord2[0]), radians(coord2[1])
 
     dlat = lat2 - lat1
     dlon = lon2 - lon1
