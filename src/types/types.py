@@ -1,6 +1,4 @@
-from typing import Tuple
 from urllib.parse import urlparse
-from typing import List
 
 
 class Coordinates:
@@ -9,7 +7,7 @@ class Coordinates:
         self.longitude = longitude
 
     def __repr__(self):
-        return f"Coordinates(latitude={self.latitude}, longitude={self.longitude})"
+        return f"Coordinates(latitude, longitude= {self.latitude}, {self.longitude})"
 
     def __getitem__(self, index):
         if index == 0:
@@ -37,9 +35,9 @@ class URL:
         return f"URL(url={self.url})"
 
 
-class XPath:
+class CSSSelector:
     def __init__(self, path: str):
         self.path = path
 
     def __repr__(self):
-        return f"XPath(path={self.path})"
+        return f"{self.path}"
