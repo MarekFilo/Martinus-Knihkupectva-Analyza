@@ -6,6 +6,15 @@ import re
 
 
 def get_coordinates_for_city(city_name: str) -> Optional[Coordinates]:
+    """
+    Get geographic coordinates (latitude, longitude) for a given city.
+
+    Parameters:
+    - city_name (str): The name of the city.
+
+    Returns:
+    - Optional[Coordinates]: A tuple containing latitude and longitude, or None if coordinates are not found.
+    """
     city_name = re.sub(
         r"\bUl\.\s*|\bul\.\s*|\bulica\b", "", city_name, flags=re.IGNORECASE
     )
@@ -19,6 +28,16 @@ def get_coordinates_for_city(city_name: str) -> Optional[Coordinates]:
 
 
 def haversine_distance(coord1: Coordinates, coord2: Coordinates) -> float:
+    """
+    Calculate the Haversine distance between two sets of geographic coordinates.
+
+    Parameters:
+    - coord1 (Coordinates): The first set of coordinates as a tuple (latitude, longitude).
+    - coord2 (Coordinates): The second set of coordinates as a tuple (latitude, longitude).
+
+    Returns:
+    - float: The Haversine distance between the two coordinates in kilometers.
+    """
     R = 6371.0
 
     lat1, lon1 = radians(coord1[0]), radians(coord1[1])
