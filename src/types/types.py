@@ -7,7 +7,7 @@ class Coordinates:
         self.longitude = longitude
 
     def __repr__(self):
-        return f"Coordinates(latitude, longitude= {self.latitude}, {self.longitude})"
+        return f"({self.latitude}, {self.longitude})"
 
     def __getitem__(self, index):
         if index == 0:
@@ -32,7 +32,7 @@ class URL:
             raise ValueError(f"Invalid URL: {url}")
 
     def __repr__(self):
-        return f"URL(url={self.url})"
+        return self.url
 
 
 class CSSSelector:
@@ -40,4 +40,4 @@ class CSSSelector:
         self.path = path
 
     def __repr__(self):
-        return f"{self.path}"
+        return self.path
