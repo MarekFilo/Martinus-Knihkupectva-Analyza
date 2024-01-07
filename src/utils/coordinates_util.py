@@ -1,23 +1,25 @@
+from src.types.types import Coordinates
 from geopy.geocoders import Nominatim
 from math import radians, sin, cos, sqrt, atan2
+from typing import Optional
 
 
-def get_coordinates_for_city(city_name):
+def get_coordinates_for_city(city_name: str) -> Optional[Coordinates]:
     geolocator = Nominatim(user_agent="my_geocoder")
     location = geolocator.geocode(city_name)
 
     if location:
-        return location.latitude, location.longitude
+        return Coordinates(latitude=location.latitude, longitude=location.longitude)
     else:
         print(f"Coordinates not found for {city_name}")
         return None
 
 
-def haversine_distance(coord1, coord2):
+def haversine_distance(coord1: Coordinates, coord2: Coordinates) -> float:
     R = 6371.0
 
-    lat1, lon1 = radians(coord1[0]), radians(coord1[1])
-    lat2, lon2 = radians(coord2[0]), radians(coord2[1])
+    lat1, lon1 = radians(coord1.latitude), radians(coord1.longitude)
+    lat2, lon2 = radians(coord2.latitude), radians(coord2.longitude)
 
     dlat = lat2 - lat1
     dlon = lon2 - lon1
