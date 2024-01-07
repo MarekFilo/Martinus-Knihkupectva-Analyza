@@ -11,6 +11,16 @@ class Coordinates:
     def __repr__(self):
         return f"Coordinates(latitude={self.latitude}, longitude={self.longitude})"
 
+    def __getitem__(self, index):
+        if index == 0:
+            return self.latitude
+        elif index == 1:
+            return self.longitude
+        else:
+            raise IndexError(
+                "Coordinates index out of range. Use 0 for latitude, 1 for longitude."
+            )
+
 
 class URL:
     def __init__(self, url: str):
